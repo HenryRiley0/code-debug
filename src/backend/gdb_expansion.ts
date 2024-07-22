@@ -191,6 +191,11 @@ export function expandValue(variableCreate: (arg: VariableObject | string, optio
 			return parseCString();
 		else if (value[0] == '{')
 			return parseTupleOrList();
+		else if(value.startsWith("std::")){
+			const eqPos = value.indexOf("=");
+			value = value.substring(eqPos + 1).trim();
+			return parseValue();
+		}
 		else
 			return parsePrimitive();
 	};
